@@ -5,8 +5,7 @@ on:
     inputs:
       mensaje:
         description: 'Mensaje personalizado'
-        required: false
-        default: 'Ejecución manual del workflow'
+        required: true
         type: string
 
 jobs:
@@ -22,4 +21,4 @@ jobs:
 
       - name: Mostrar mensaje de ejecución
         run: |
-          echo 'El workflow se ejecutó manualmente con el mensaje': $MENSAJE
+          echo "El workflow se ejecutó manualmente con el mensaje: $MENSAJE"
