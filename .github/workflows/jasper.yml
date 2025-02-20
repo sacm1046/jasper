@@ -1,0 +1,69 @@
+name: Manual Workflow Execution
+
+on:
+  workflow_dispatch:
+    inputs:
+      file:
+        description: 'Archivo .jrxml a compilar'
+        required: true
+        type: string
+        default: CONTRATO_GNRAL_FMU_v6
+
+jobs:
+  compilar-jrxml:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Subir archivo como artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: "${{ github.event.inputs.file }}.jrxml"
+          path: "${{ github.event.inputs.file }}.jrxml"
+
+      - name: Construir imagen Docker
+        run: |
+          docker build --platform linux/amd64 -t java6-image-test .
+
+      # Paso 6: Ejecutar el contenedor y compilar el archivo .jrxml
+    #   - name: Compilar .jrxml a .jasper
+    #     run: |
+    #       docker run -it --rm \
+    #         -v $(pwd)/volumen:/app \
+    #         java6-image-test bash -c "
+    #         apt-get update && apt-get install -y unzip &&
+    #         unzip /app/jasperreports-5.6.0-project.zip -d /app/ &&
+    #         export CLASSPATH=/app/jasperreports-5.6.0/dist/jasperreports-5.6.0.jar:/app/jasperreports-5.6.0/lib/* &&
+    #         echo 'import net.sf.jasperreports.engine.*;
+    #         public class CompileReport {
+    #             public static void main(String[] args) {
+    #                 if (args.length < 1) {
+    #                     System.out.println(\"Uso: java CompileReport <archivo.jrxml>\");
+    #                     return;
+    #                 }
+    #                 try {
+    #                     JasperCompileManager.compileReportToFile(args[0]);
+    #                     System.out.println(\"Archivo compilado: \" + args[0].replace(\".jrxml\", \".jasper\"));
+    #                 } catch (JRException e) {
+    #                     e.printStackTrace();
+    #                 }
+    #             }
+    #         }' > CompileReport.java &&
+    #         javac -cp \"$CLASSPATH\" CompileReport.java &&
+    #         java -cp \"$CLASSPATH:/app\" CompileReport /app/archivo.jrxml
+    #       "
+
+    #   # Paso 7: Extraer el archivo .jasper generado
+    #   - name: Extraer archivo .jasper
+    #     run: |
+    #       cp volumen/archivo.jasper .
+    #       echo "Archivo .jasper generado: $(ls *.jasper)"
+
+    #   # Paso 8 (Opcional): Subir el archivo .jasper como artefacto
+    #   - name: Subir archivo .jasper como artefacto
+    #     uses: actions/upload-artifact@v3
+    #     with:
+    #       name: archivo-compilado
+    #       path: ./archivo.jasper

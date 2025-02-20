@@ -1,0 +1,696 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.21.3.final using JasperReports Library version 6.21.3-4a3078d20785ebe464f18037d738d12fc98c13cf  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="CONTRATO_GNRAL_FMU" pageWidth="595" pageHeight="842" whenNoDataType="NoPages" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="8e70a515-61fe-45fa-b35b-4488cd0c9b2b">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<parameter name="par_nombreCliente" class="java.lang.String">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="par_rutCliente" class="java.lang.String">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="par_direccion" class="java.lang.String">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="par_fecha" class="java.lang.String">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="par_comuna" class="java.lang.String">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="par_email" class="java.lang.String">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="par_repLegal" class="java.lang.String">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="par_rolUnico" class="java.lang.String">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="par_fono1" class="java.lang.String">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="par_fono2" class="java.lang.String">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="par_ciudad" class="java.lang.String">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="par_fir_par" class="java.lang.String">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<detail>
+		<band height="745" splitType="Stretch">
+			<frame>
+				<reportElement x="0" y="10" width="555" height="730" uuid="b8b66108-ff28-46da-9d00-9ac1c6ce6b75">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<staticText>
+					<reportElement x="15" y="176" width="525" height="13" forecolor="#003A6F" uuid="4379e4af-416f-4d4e-b9d9-d5b58f20786b"/>
+					<textElement textAlignment="Justified">
+						<font fontName="Arial" size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[A) IDENTIFICACIÓN DE LAS PARTES]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="62" y="394" width="478" height="101" forecolor="#003A6F" uuid="850fcda6-00ce-497e-a3d2-2d244b5fddaa">
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					</reportElement>
+					<textElement verticalAlignment="Top" markup="html">
+						<font fontName="Arial" size="10"/>
+						<paragraph lineSpacing="Proportional" lineSpacingSize="1.2"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Nombre o Razón Social: "+$P{par_nombreCliente}+"<br>"+
+"Rol Único Tributario:"+$P{par_rutCliente}+"<br>"+
+"Domicilio: "+$P{par_direccion}+", "+$P{par_comuna}+", "+$P{par_ciudad}+"<br>"+
+"Teléfono: "+$P{par_fono1}+" / "+$P{par_fono2}+"<br>"+
+"Correo Electrónico: "+$P{par_email}+"<br>"+
+"Representante Legal: "+$P{par_repLegal}+"<br>"+
+"Rol Único Tributario del Representante Legal: "+$P{par_rolUnico}+""]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="14" y="198" width="524" height="13" forecolor="#003A6F" uuid="e6101660-7efc-471a-9246-30fc00ccc975">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Justified" markup="html">
+						<font fontName="Arial" size="10"/>
+					</textElement>
+					<text><![CDATA[<b>1. </b>Administradora, en adelante, la administradora]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="61" y="219" width="479" height="47" forecolor="#003A6F" uuid="ef38768e-6bab-42ca-884b-a063204f6534">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
+						<font fontName="Arial" size="10" isBold="false"/>
+						<paragraph lineSpacing="Proportional" lineSpacingSize="1.2"/>
+					</textElement>
+					<text><![CDATA[Razón Social: <b>BICE Inversiones Administradora General de Fondos S.A.</b><br>
+Rol Único Tributario: 96.514.410-2<br>
+Domicilio: Apoquindo 3846 piso 13.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="14" y="277" width="526" height="26" forecolor="#003A6F" uuid="61a97a39-bf62-4920-845d-6ec2d28d862f">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Justified" markup="html">
+						<font fontName="Arial" size="10"/>
+					</textElement>
+					<text><![CDATA[<b>2. </b>Agente: (en caso de que el contrato sea suscrito por medio de un agente debidamente mandatado por la Administradora), en adelante, el “<i>Agente</i>” o los “<i>Agentes</i>”:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="14" y="368" width="526" height="13" forecolor="#003A6F" uuid="80702d40-a64f-4b59-aab0-81d6302bd471">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Justified" markup="html">
+						<font fontName="Arial" size="10"/>
+					</textElement>
+					<text><![CDATA[<b>3. </b>Partícipe, en adelante, el “Partícipe”:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="14" y="498" width="526" height="13" forecolor="#003A6F" uuid="b122cf2c-584f-43d7-9f3a-1029c7cf4ac1">
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					</reportElement>
+					<textElement markup="html">
+						<font fontName="Arial" size="10"/>
+					</textElement>
+					<textFieldExpression><![CDATA["<b>4. </b>Fecha: "+$P{par_fecha}+""]]></textFieldExpression>
+				</textField>
+				<image>
+					<reportElement x="330" y="-15" width="210" height="60" uuid="3237e433-3d33-4afb-974f-7e45255a1521">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					</reportElement>
+					<imageExpression><![CDATA["CONTRATO_GNRAL_FMU/BiceInversionesAGF.jpg"]]></imageExpression>
+				</image>
+				<staticText>
+					<reportElement x="16" y="71" width="522" height="97" forecolor="#003A6F" uuid="95c529cd-9aaf-4cfc-9966-53c63faff47c">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Justified" verticalAlignment="Middle" rotation="None" markup="html">
+						<font fontName="Arial" size="10" isBold="false"/>
+						<paragraph lineSpacing="Proportional" lineSpacingSize="1.2"/>
+					</textElement>
+					<text><![CDATA[El presente contrato, en adelante el “Contrato”, establece las condiciones que regirán la relación entre el Partícipe, individualizado a continuación y BICE Inversiones Administradora General de Fondos S.A., en todo lo que dice relación con los aportes y rescates de cuotas y pagos de las disminuciones de capital según corresponda, en uno o más fondos actualmente administrados por la Administradora, o que pueda administrar en el futuro, en adelante el “<u>Fondo</u>” o los “<u>Fondos</u>”, según corresponda, todo de conformidad con lo dispuesto en la Norma de Carácter General N° 365 de la Comisión para el Mercado Financiero, en adelante indistintamente también, la “<u>CMF</u>”.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="62" y="315" width="479" height="47" forecolor="#003A6F" uuid="70df66d3-4966-4f5a-8992-57ce06b00fe5">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
+						<font fontName="Arial" size="10" isBold="false"/>
+						<paragraph lineSpacing="Proportional" lineSpacingSize="1.2"/>
+					</textElement>
+					<text><![CDATA[Nombre o Razón Social: Banco BICE<br>
+Rol Único Tributario: 97.080.000-k<br>
+Domicilio: Apoquindo 3846 piso 13.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="24" y="657" width="516" height="13" forecolor="#003A6F" uuid="c21721fa-b9c8-4a76-b2c5-6caf8c068a97">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Justified" markup="html">
+						<font fontName="Arial" size="10" isBold="true"/>
+						<paragraph lineSpacing="Proportional" lineSpacingSize="1.1"/>
+					</textElement>
+					<text><![CDATA[B.2. MEDIOS REMOTOS]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="34" y="615" width="506" height="31" forecolor="#003A6F" uuid="b023ba3a-f9e9-4c71-8223-34c31a4b9330">
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Justified" markup="html">
+						<font fontName="Arial" size="10"/>
+						<paragraph lineSpacing="Proportional" lineSpacingSize="1.1"/>
+					</textElement>
+					<text><![CDATA[Los aportes y solicitudes de rescates podrán ser realizados en las oficinas de la Administradora, o en las de sus Agentes, suscribiendo presencialmente la solicitud de suscripción de cuotas o la de rescate correspondiente.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="25" y="591" width="515" height="13" forecolor="#003A6F" uuid="bba08262-bcbe-4fb4-85a6-7bd358e4bdb2">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Justified" markup="html">
+						<font fontName="Arial" size="10" isBold="true"/>
+						<paragraph lineSpacing="Proportional" lineSpacingSize="1.1"/>
+					</textElement>
+					<text><![CDATA[B.1. PERSONALMENTE]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="15" y="554" width="525" height="30" forecolor="#003A6F" uuid="c7fdea44-d56b-408f-9ffd-385ecbb4ea31">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Justified" markup="html">
+						<font fontName="Arial" size="10"/>
+						<paragraph lineSpacing="Proportional" lineSpacingSize="1.1"/>
+					</textElement>
+					<text><![CDATA[Los mecanismos a través de los cuales el Partícipe podrá realizar los aportes y solicitar los rescates de los fondos, serán los siguientes:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="15" y="529" width="525" height="13" forecolor="#003A6F" uuid="58c56025-579f-4454-af98-9fe97883f40a">
+						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Justified">
+						<font fontName="Arial" size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[B) APORTES Y RESCATES]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="34" y="681" width="506" height="42" forecolor="#003A6F" uuid="bd153435-ee2c-462a-afdb-8f75b7b6d548">
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Justified" markup="html">
+						<font fontName="Arial" size="10"/>
+						<paragraph lineSpacing="Proportional" lineSpacingSize="1.1"/>
+					</textElement>
+					<text><![CDATA[Asimismo, los aportes y solicitudes de rescates podrán ser realizados por el Partícipe que haya suscrito el presente Contrato General de Fondos, a través de los medios remotos, ya sea Correo Electrónico, Internet o Plataforma Telefónica no automatizada que la Administradora o los Agentes, pongan a su disposición.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="32" width="555" height="13" forecolor="#003A6F" uuid="31fba9cc-8ea1-43c0-b827-e9d0feaf758e">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Center" markup="html">
+						<font fontName="Arial" size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[<u>CONTRATO GENERAL DE FONDOS</u>]]></text>
+				</staticText>
+			</frame>
+		</band>
+		<band height="740">
+			<frame>
+				<reportElement x="0" y="10" width="555" height="730" uuid="af2f36ef-912a-4b55-9ceb-eef7753dafca">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<staticText>
+					<reportElement x="34" y="15" width="506" height="701" forecolor="#003A6F" uuid="8cce2f5d-ab7b-482e-a87c-66d83a2b345f">
+						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Justified" markup="html">
+						<font fontName="Arial" size="10"/>
+						<paragraph lineSpacing="Proportional" lineSpacingSize="1.1"/>
+					</textElement>
+					<text><![CDATA[B.2.1 Para operar mediante Correo Electrónico, el Partícipe deberá enviar a la Administradora o a los Agentes, un correo electrónico que contenga la instrucción de realizar un aporte o un retiro, a o desde un fondo determinado, que sea equivalente a una cierta cantidad de dinero.
+
+B.2.2 Para operar a través de Internet, el Partícipe deberá utilizar su identificador de usuario y su clave secreta, proporcionada por la Administradora, o por los Agentes. Esta clave es personal e intransferible.
+
+B.2.3 Para operar a través de Plataforma Telefónica no automatizada, el Partícipe deberá comunicarse con la Administradora o con sus Agentes. El Partícipe deberá dar respuesta al menos a 2 consultas sobre sus datos o antecedentes personales o legales, que permitan comprobar su identidad y autorizar el acceso al sistema de Plataforma Telefónica, en caso de que las respuestas sean correctas. Toda la información relevante a la inversión o rescate que el Partícipe realice por este medio, quedará grabada en archivos electrónicos que se mantendrán debidamente custodiados.
+
+En caso de falla, interrupción o no disponibilidad de los medios remotos, el Partícipe podrá concurrir a las oficinas de la Administradora o a la de sus Agentes a fin de efectuar personalmente el aporte o solicitar el rescate. Los aportes y solicitudes de rescates realizados a través de Internet u otros sistemas de transmisión remota se sujetarán a las condiciones y requisitos establecidos por la Comisión para el Mercado Financiero.
+
+Las inversiones que se soliciten dentro del horario hábil de operaciones del Fondo se harán efectivas en línea (tiempo real). Aquellas inversiones que solicite el Partícipe en día hábil bancario con posterioridad al cierre de operaciones del Fondo, día sábado, domingo, festivo e inhábil bancario, se harán efectivas el día hábil bancario siguiente, antes del cierre de operaciones del fondo, y previa certificación de la recepción conforme de los fondos correspondientes. El aporte se entenderá efectuado en la fecha en que la sociedad Administradora reciba efectivamente los fondos.
+
+Los rescates que se soliciten dentro del horario hábil de operaciones del Fondo se entenderán efectuados en línea (tiempo real). Los rescates que solicite el Partícipe en día hábil bancario con posterioridad al cierre de operaciones del Fondo, día sábado, domingo, festivo e inhábil bancario, se entenderán efectuadas el día hábil bancario siguiente, antes del cierre de operaciones del fondo. En caso de que se efectúe una solicitud de rescate de cuotas en un día inhábil bancario en el país en que el fondo invierta, los Reglamentos Internos de cada uno de ellos deberán regular dicha situación.
+
+El Partícipe a través de la página web de la Administradora (www.biceinversiones.cl) o de la de sus Agentes, o directamente en las oficinas de la Administradora, o en las de sus Agentes, tendrá a su disposición, entre otras, la siguiente información: consulta de saldos, movimientos, cartolas, certificados tributarios, consulta de la cartera de inversiones del Fondo, reglamento interno, FECU (Ficha Estadística Codificada Uniforme) de los Fondos.
+
+El sitio Internet puesto a disposición por la Administradora, denominado www.biceinversiones.cl, tiene diversos sistemas de seguridad, tales como autenticación, control de acceso, confidencialidad, integridad y no repudio, según lo dispuesto en la normativa de la Comisión para el Mercado Financiero.
+
+El Partícipe reconoce y acepta, que cualquier instrucción, mandato u orden que efectúe a través de los medios remotos, ya sea Correo Electrónico, Internet o Plataforma Telefónica, constituye una expresa manifestación de su voluntad en orden a aceptar las condiciones, características y modalidades bajo las cuales se presta el servicio señalado, como también de las responsabilidades que asume al hacer uso del mismo y de la información contenida en él.
+
+El Partícipe faculta y autoriza a la Administradora, o a sus Agentes, en su caso, para que grabe o capte las voces del Partícipe o de quien lo represente, de todas y cada una de las conversaciones y/o comunicaciones telefónicas que se generen con ocasión de los aportes o rescates solicitados y que podrán ser utilizadas como medio probatorio en caso de controversia a fin de establecer la existencia de las operaciones que ordene o celebre y/o sus condiciones precisas. La Administradora, o sus Agentes, podrán reproducir dichas grabaciones sólo en la medida que sea necesario para aclarar, explicar, demostrar, probar y/o verificar cualquier instrucción o transacción del Partícipe, ante el mismo Partícipe, ante terceros, ante cualquier ente fiscalizador y/o ante cualquier tribunal incluyendo arbitral.]]></text>
+				</staticText>
+			</frame>
+		</band>
+		<band height="740">
+			<frame>
+				<reportElement x="0" y="10" width="555" height="730" uuid="71e8d2e1-27a4-4e86-ad24-e0c0ca3f166b">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<staticText>
+					<reportElement x="34" y="11" width="506" height="80" forecolor="#003A6F" uuid="f99b32fe-63e6-4b8f-849e-4dbfb0413fff">
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Justified" verticalAlignment="Top" markup="none">
+						<font fontName="Arial" size="10"/>
+						<paragraph lineSpacing="Proportional" lineSpacingSize="1.1"/>
+					</textElement>
+					<text><![CDATA[Con todo, los mecanismos que emplee el Partícipe deben ser consistentes con aquellos autorizados en cada uno de los Reglamentos Internos de los fondos que administra la Administradora y en que el Partícipe esté realizando aportes o solicitudes de rescates.
+
+La Administradora, o sus Agentes podrán implementar en el futuro nuevos mecanismos de identificación del Partícipe para lo cual se le comunicará oportunamente.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="24" y="97" width="516" height="13" forecolor="#003A6F" uuid="592a9409-b7d8-4fb0-8a6d-5b69bf1bd715">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Justified" markup="html">
+						<font fontName="Arial" size="10" isBold="true"/>
+						<paragraph lineSpacing="Proportional" lineSpacingSize="1.1"/>
+					</textElement>
+					<text><![CDATA[B.3. PROMESAS DE SUSCRIPCIÓN DE CUOTAS]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="34" y="120" width="506" height="30" forecolor="#003A6F" uuid="73e6ce77-7260-42e9-a617-0e726f918bcd">
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Justified" markup="html">
+						<font fontName="Arial" size="10"/>
+						<paragraph lineSpacing="Proportional" lineSpacingSize="1.1"/>
+					</textElement>
+					<text><![CDATA[En el caso de los Fondos que contemplen la suscripción de contratos de promesa de suscripción de cuotas, se estará a lo dispuesto en dicho contrato, respecto a la suscripción de cuotas del fondo en cuestión.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="15" y="161" width="525" height="13" forecolor="#003A6F" uuid="858f24a7-a54f-4eec-8a68-fe4a7b850fa4">
+						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Justified">
+						<font fontName="Arial" size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[C) INFORMACIÓN AL PARTÍCIPE]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="15" y="186" width="525" height="280" forecolor="#003A6F" uuid="675cd4a1-df6a-46d8-9675-834904435abe">
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Justified" markup="html">
+						<font fontName="Arial" size="10"/>
+						<paragraph lineSpacing="Proportional" lineSpacingSize="1.1"/>
+					</textElement>
+					<text><![CDATA[El Partícipe podrá obtener los Reglamentos Internos de cada fondo y los Folletos Informativos correspondientes, debidamente actualizados, en las oficinas de la Administradora, en las de sus Agentes, a través de la página web de la administradora (<u>www.biceinversiones.cl</u>) o de la de sus Agentes, y en el sitio web de la Comisión para el Mercado Financiero (www.cmfchile.cl).
+					
+<br><br>Los comprobantes de aportes o rescates que se hayan efectuado, ya sea personalmente, por medios remotos o mediante Planes Periódicos de Inversión, y los comprobantes de disminuciones de capital respectivos, serán enviados por la Administradora o sus Agentes al domicilio a través de carta o a la dirección de correo electrónico del Partícipe correspondiente, de conformidad con la información registrada por la Administradora o sus Agentes, en atención a la información proporcionada por cada Partícipe.
+
+<br><br>La información relativa al Fondo que, por ley, normativa vigente y reglamentación interna del mismo, deba ser remitida directamente a los Partícipes, se comunicará mediante la publicación de dicha información en la página web, ya sea de la Administradora (www.biceinversiones.cl) o del Agente, o se enviará por correo electrónico al Partícipe, a la dirección de correo electrónico informada a la Administradora. En caso de que el Partícipe no disponga de correo electrónico, la información podrá ser enviada por medio de carta.
+
+<br><br>El Partícipe declara que la decisión de utilizar el correo electrónico como medio de comunicación será de su única y exclusiva responsabilidad. Asimismo, declara conocer y desde ya que asume bajo su responsabilidad todos los riesgos derivados de este tipo de transmisiones, tales como falsificaciones, alteraciones, uso, malicioso o no, de información por parte de terceros, defectos o interrupciones en la transmisión, asumiendo las consecuencias derivadas de caso fortuito o fuerza mayor no imputables a la Administradora ni a sus Agentes.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="15" y="469" width="525" height="13" forecolor="#003A6F" uuid="6bbd1ccb-39fc-4063-b93f-884c9d38eebb">
+						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Justified">
+						<font fontName="Arial" size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[D) PLANES DE SUSCRIPCIÓN Y RESCATE DE CUOTAS]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="24" y="493" width="516" height="13" forecolor="#003A6F" uuid="6ad3bfb9-4362-4d06-a5d0-ce156bd4aec0">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Justified" markup="html">
+						<font fontName="Arial" size="10" isBold="true"/>
+						<paragraph lineSpacing="Proportional" lineSpacingSize="1.1"/>
+					</textElement>
+					<text><![CDATA[D.1. PLANES DE APORTE]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="34" y="516" width="506" height="64" forecolor="#003A6F" uuid="e16dbae3-4f75-421d-b807-271eaf8a0357">
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Justified" markup="html">
+						<font fontName="Arial" size="10"/>
+						<paragraph lineSpacing="Proportional" lineSpacingSize="1.1"/>
+					</textElement>
+					<text><![CDATA[La Administradora directamente o a través de sus Agentes, pondrá a disposición del Partícipe, modalidades de Planes Periódicos de Inversión, lo que se indica a continuación:
+
+Sin perjuicio de lo anterior, los fondos y series habilitados para estos efectos, serán aquellos que defina la Administradora en el Reglamento Interno de cada fondo.:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="24" y="591" width="516" height="13" forecolor="#003A6F" uuid="f4a740af-e1df-4140-802d-465430bff132">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Justified" markup="html">
+						<font fontName="Arial" size="10" isBold="true"/>
+						<paragraph lineSpacing="Proportional" lineSpacingSize="1.1"/>
+					</textElement>
+					<text><![CDATA[i. <u>Descuento por cargo en cuenta corriente</u>]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="34" y="617" width="506" height="104" forecolor="#003A6F" uuid="411917df-78a2-4b19-a09e-5d7e83eaf0c9">
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Justified" markup="html">
+						<font fontName="Arial" size="10"/>
+						<paragraph lineSpacing="Proportional" lineSpacingSize="1.1"/>
+					</textElement>
+					<text><![CDATA[Consiste en una modalidad de suscripción y pago mensual de cuotas por un monto fijo, el cuál será predeterminado en Unidades de Fomento o pesos al momento de firmar la “Autorización de Inversión Periódica”. Para ello el Partícipe deberá autorizar al Banco que corresponda, mediante la suscripción de un mandato, para que cargue mensualmente en su Cuenta Corriente dicho monto fijo y lo entere por cuenta de su mandante al fondo mutuo correspondiente. A fin de hacer aplicable esta modalidad de aporte especial, el Partícipe deberá completar la “Autorización de Inversión Periódica”. firmando, en señal de autorización expresa, la cláusula de Cargo en Cuenta Corriente. En dicha cláusula se consigna el tiempo de duración, las fechas de cargo y el nombre del Banco autorizado para efectuarlo.]]></text>
+				</staticText>
+			</frame>
+		</band>
+		<band height="740">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<frame>
+				<reportElement x="0" y="10" width="555" height="730" uuid="37149a02-46cb-4aff-b8b6-eb90cb0396c2">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<staticText>
+					<reportElement x="34" y="16" width="506" height="169" forecolor="#003A6F" uuid="1296c8d2-77b1-4521-9874-0efb20203912"/>
+					<textElement textAlignment="Justified" markup="none">
+						<font fontName="Arial" size="10"/>
+						<paragraph lineSpacing="Proportional" lineSpacingSize="1.1"/>
+					</textElement>
+					<text><![CDATA[Para estos efectos, el cargo en la cuenta corriente se tendrá por efectuado el día del mes o del período indicado en la “Autorización de Inversión Periódica”, salvo que ese día fuere sábado, domingo, festivo o inhábil bancario, caso en el cual el cargo se tendrá por efectuado el día hábil bancario siguiente. Sin perjuicio de lo anterior, el aporte se entenderá efectuado en la fecha en que la sociedad Administradora reciba efectivamente los fondos.
+
+La sociedad Administradora o sus Agentes confirmarán al Partícipe la realización de cada uno de los aportes periódicos, indicando el valor de la cuota usada en la conversión del aporte, el número de cuotas incorporada a su cuenta, la fecha en que esta operación se efectuó y el saldo de cuotas que tenga el Partícipe a dicha época. Este plan de inversión se mantendrá vigente: (i) hasta que el titular de la cuenta corriente cierre dicha cuenta; (ii) hasta que el Partícipe revoque el mandato conferido al Banco; o (iii) hasta la fecha de vigencia indicada en la “Autorización de Inversión Periódica”. Si el Partícipe no mantuviere fondos disponibles en su Cuenta Corriente al momento del cargo, la inversión no será efectuada, sin responsabilidad para la Administradora y sin obligación alguna para el Partícipe.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="24" y="191" width="516" height="13" forecolor="#003A6F" uuid="3065db2f-b1e4-43e0-bff7-7828d6cc5544">
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Justified" markup="html">
+						<font fontName="Arial" size="10" isBold="true"/>
+						<paragraph lineSpacing="Proportional" lineSpacingSize="1.1"/>
+					</textElement>
+					<text><![CDATA[ii.  <u>Descuento por cargo en cuenta vista bancaria</u>]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="34" y="219" width="506" height="276" forecolor="#003A6F" uuid="71dbcf70-3bc3-43b3-9ebc-3fc91934a0f1">
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Justified" markup="none">
+						<font fontName="Arial" size="10"/>
+						<paragraph lineSpacing="Proportional" lineSpacingSize="1.1"/>
+					</textElement>
+					<text><![CDATA[Consiste en una modalidad de suscripción y pago mensual de cuotas por un monto fijo, el cuál será predeterminado en Unidades de Fomento o pesos al momento de firmar la “Autorización de Inversión Periódica”. Para ello el Partícipe deberá autorizar al Banco que corresponda, mediante la suscripción de un mandato, para que cargue mensualmente en su cuenta vista bancaria dicho monto fijo y lo entere por cuenta de su mandante al fondo mutuo correspondiente. A fin de hacer aplicable esta modalidad de aporte especial, el Partícipe deberá completar la “Autorización de Inversión Periódica” firmando, en señal de autorización expresa, la cláusula de cargo en cuenta vista bancaria. En dicha cláusula se consigna el tiempo de duración, las fechas de cargo y el nombre del Banco autorizado para efectuarlo.
+
+Para estos efectos, el cargo en la cuenta corriente se tendrá por efectuado el día del mes o del período indicado en la “Autorización de Inversión Periódica”, salvo que ese día fuere sábado, domingo, festivo o inhábil bancario, caso en el cual el cargo se tendrá por efectuado el día hábil bancario siguiente. Sin perjuicio de lo anterior, el aporte se entenderá efectuado en la fecha en que la sociedad Administradora reciba efectivamente los fondos.
+
+La sociedad Administradora o sus Agentes confirmarán al Partícipe la realización de cada uno de los aportes periódicos, indicando el valor de la cuota usada en la conversión del aporte, el número de cuotas incorporada a su cuenta, la fecha en que esta operación se efectuó y el saldo de cuotas que tenga el Partícipe a dicha época. Este plan de inversión se mantendrá vigente: (i) hasta que el titular de la cuenta corriente cierre dicha cuenta; (ii) hasta que el Partícipe revoque el mandato conferido al Banco; o (iii) hasta la fecha de vigencia indicada en la “Autorización de Inversión Periódica”. Si el Partícipe no mantuviere fondos disponibles en su Cuenta Corriente al momento del cargo, la inversión no será efectuada, sin responsabilidad para la Administradora y sin obligación alguna para el Partícipe.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="24" y="510" width="516" height="13" forecolor="#003A6F" uuid="86714718-104b-457b-a38c-373b6fb06cfe">
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Justified" markup="html">
+						<font fontName="Arial" size="10" isBold="true"/>
+						<paragraph lineSpacing="Proportional" lineSpacingSize="1.1"/>
+					</textElement>
+					<text><![CDATA[iii. <u>Descuentos por planilla</u>]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="34" y="539" width="505" height="178" forecolor="#003A6F" uuid="9fb7e86e-ca76-492f-aae8-a56f19fcf381">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Justified" markup="none">
+						<font fontName="Arial" size="10"/>
+						<paragraph lineSpacing="Proportional" lineSpacingSize="1.1"/>
+					</textElement>
+					<text><![CDATA[Consiste en una modalidad de suscripción y pago mensual de cuotas o por la periodicidad que se indique en el en la “Autorización de Inversión Periódica”, por un monto fijo, el cual será predeterminado en Unidades de Fomento o pesos, por medio del cual el Partícipe autorizará a su empleador, mediante un mandato otorgado en la “Autorización de Inversión Periódica”, para que descuente de su remuneración, con la periodicidad indicada, dicho monto fijo y sea enterado al fondo que corresponda en la fecha establecida en la “Autorización de Inversión Periódica”.
+
+Para estos efectos, el cargo en la cuenta corriente se tendrá por efectuado el día del mes o del período indicado en la “Autorización de Inversión Periódica”, salvo que ese día fuere sábado, domingo, festivo o inhábil bancario, caso en el cual el cargo se tendrá por efectuado el día hábil bancario siguiente. Sin perjuicio de lo anterior, el aporte se entenderá efectuado en la fecha en que la sociedad Administradora reciba efectivamente los fondos.
+
+La sociedad Administradora o sus Agentes confirmarán al Partícipe la realización de cada uno de los aportes periódicos, indicando el valor de la cuota usada en la conversión del aporte, el número de cuotas incorporada]]></text>
+				</staticText>
+			</frame>
+		</band>
+		<band height="740">
+			<frame>
+				<reportElement x="0" y="10" width="555" height="730" uuid="4611e77d-30bb-4039-93b8-7d27d6e2b945">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<staticText>
+					<reportElement x="34" y="9" width="506" height="80" forecolor="#003A6F" uuid="81b6e7b9-d9d5-4c4a-9cb1-7387b9b8ea7a">
+						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Justified" markup="none">
+						<font fontName="Arial" size="10"/>
+						<paragraph lineSpacing="Proportional" lineSpacingSize="1.1"/>
+					</textElement>
+					<text><![CDATA[a su cuenta, la fecha en que esta operación se efectuó y el saldo de cuotas que tenga el Partícipe a dicha época. Este plan de inversión se mantendrá vigente: (i) hasta que el titular de la cuenta corriente cierre dicha cuenta; (ii) hasta que el Partícipe revoque el mandato conferido al Banco; o (iii) hasta la fecha de vigencia indicada en la “Autorización de Inversión Periódica”. Si el Partícipe no mantuviere fondos disponibles en su Cuenta Corriente al momento del cargo, la inversión no será efectuada, sin responsabilidad para la Administradora y sin obligación alguna para el Partícipe.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="24" y="94" width="514" height="13" forecolor="#003A6F" uuid="2b8a8af7-6c63-49ed-a872-ae5dfb494864">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Justified" markup="html">
+						<font fontName="Arial" size="10" isBold="true"/>
+						<paragraph lineSpacing="Proportional" lineSpacingSize="1.1"/>
+					</textElement>
+					<text><![CDATA[D.2. PLANES DE REINVERSIÓN DE REPARTOS DE BENEFICIOS]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="34" y="118" width="505" height="178" forecolor="#003A6F" uuid="8e73946c-acea-407b-b566-79654dd98ee0">
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Justified" markup="none">
+						<font fontName="Arial" size="10"/>
+						<paragraph lineSpacing="Proportional" lineSpacingSize="1.1"/>
+					</textElement>
+					<text><![CDATA[Los Partícipes podrán, en la medida que así lo establezcan los Reglamentos Internos de los Fondos, suscribir planes de reinversión de repartos de beneficios.
+
+Para estos efectos, ya sea al momento de realizar el aporte o con posterioridad a éste, el Partícipe deberá manifestar su decisión de reinvertir los repartos de beneficios en cuotas del mismo fondo.
+
+Sin perjuicio de lo anterior, los Partícipes pueden igualmente solicitar que el pago de los beneficios que les correspondan sea efectuado en cuotas liberadas del mismo fondo, representativas de una capitalización equivalente, de conformidad con lo establecido en el artículo 80 de la Ley N° 20.712, siempre que lo anterior esté permitido por los respectivos Reglamentos Internos.
+
+Por otra parte, y respecto de la distribución de dividendos que deban efectuar los Fondos sujetos al beneficio tributario establecido en el artículo 107 de la Ley de Impuesto a la Renta, se efectuará en cuotas de los mismos fondos, siempre que lo anterior esté establecido así en los respectivos Reglamentos Internos.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="24" y="300" width="516" height="13" forecolor="#003A6F" uuid="920ccf6b-37af-4b51-8fd1-0410e3c0221a">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Justified" markup="html">
+						<font fontName="Arial" size="10" isBold="true"/>
+						<paragraph lineSpacing="Proportional" lineSpacingSize="1.1"/>
+					</textElement>
+					<text><![CDATA[D.3. PLANES DE RESCATES]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="34" y="321" width="505" height="57" forecolor="#003A6F" uuid="0d85a52a-5648-4c90-9e23-665d5324af0d">
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Justified" markup="none">
+						<font fontName="Arial" size="10"/>
+						<paragraph lineSpacing="Proportional" lineSpacingSize="1.1"/>
+					</textElement>
+					<text><![CDATA[El Partícipe podrá programar rescates, caso en el cual ejercerá su derecho en una fecha determinada, distinta a la fecha de presentación de la solicitud de rescate correspondiente, la cual deberá constar expresamente en la solicitud. Los rescates programados deberán solicitarse y efectuarse de conformidad con lo establecido en los Reglamentos Internos de cada fondo.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="16" y="391" width="524" height="13" forecolor="#003A6F" uuid="dcf71d46-e954-4616-90ad-b42c412ffd23">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Justified" markup="html">
+						<font fontName="Arial" size="10" isBold="true"/>
+						<paragraph lineSpacing="Proportional" lineSpacingSize="1.1"/>
+					</textElement>
+					<text><![CDATA[E) DECLARACIONES]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="16" y="417" width="523" height="304" forecolor="#003A6F" uuid="b36f653b-fe04-434b-97d8-4bc64bb34665">
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Justified" markup="html">
+						<font fontName="Arial" size="10"/>
+						<paragraph lineSpacing="Proportional" lineSpacingSize="1.1"/>
+					</textElement>
+					<text><![CDATA[El Partícipe individualizado precedentemente declara haber sido debidamente informado por la Administradora de lo siguiente:
+
+<br><br><b>1.</b> Que previo a cada inversión en cualquier fondo mutuo, la Administradora o sus Agentes deben proveerle un Folleto Informativo con elementos claves para el Partícipe. Además, que la Administradora, directamente o a través de sus Agentes, según corresponda, deben poner a disposición del Partícipe el reglamento interno del fondo, junto a copia de las últimas carteras de inversiones y de los últimos estados financieros remitidos a la Comisión para el Mercado Financiero, con sus respectivas notas.
+
+<br><br><b>2.</b> Que la rentabilidad de los fondos es esencialmente variable e indeterminada, salvo en el caso de los fondos garantizados por aquella parte que se encuentre garantizada y se mantenga en el fondo hasta el término del periodo de inversión.
+
+<br><br><b>3.</b> Que la posibilidad de rescatar o no su inversión y las condiciones y plazo del pago correspondiente, se regirán por las condiciones establecidas para ello en el Reglamento Interno del fondo respectivo.
+
+<br><br><b>4.</b> Que los reglamentos y el texto tipo de contratos pueden ser consultados en la página web de la Comisión para el Mercado Financiero (<u>www.cmfchile.cl</u>), de la Administradora (<u>www.biceinversiones.cl</u>) o de sus Agentes, así como en las oficinas de la Administradora y sus agentes. Asimismo, si bien la Comisión para el Mercado Financiero fiscaliza a la Administradora y a los fondos administrados por ésta, aquella no se pronuncia sobre esos textos tipos, la calidad de las cuotas ofrecidas ni de las garantías constituidas.
+
+<br><br><b>5.</b> Que la información del Fondo puede consultarse en la página web de la Comisión para el Mercado Financiero (<u>www.cmfchile.cl</u>), de la Administradora (www.biceinversiones.cl) o de sus Agentes.]]></text>
+				</staticText>
+			</frame>
+		</band>
+		<band height="740">
+			<frame>
+				<reportElement x="0" y="10" width="555" height="730" uuid="e7f2126d-3522-45ad-a918-e25929d7b99d">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<staticText>
+					<reportElement x="16" y="12" width="522" height="31" forecolor="#003A6F" uuid="a4ff1fe7-0a9b-4eb1-b25e-deb6025d7f19">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Justified" markup="none">
+						<font fontName="Arial" size="10"/>
+						<paragraph lineSpacing="Proportional" lineSpacingSize="1.1"/>
+					</textElement>
+					<text><![CDATA[El presente Contrato se extiende y firma en 2 ejemplares de idéntico tenor y fecha, quedando uno en poder de cada parte.]]></text>
+				</staticText>
+				<line>
+					<reportElement x="42" y="197" width="200" height="1" forecolor="#003A6F" uuid="04629190-fb35-4d09-8f49-c0a29f591e80">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					</reportElement>
+				</line>
+				<staticText>
+					<reportElement x="42" y="198" width="200" height="13" forecolor="#003A6F" uuid="edca958c-dad2-4276-816d-6702ba079b1d">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Center" markup="html">
+						<font fontName="Arial" size="10" isBold="false"/>
+						<paragraph lineSpacing="Proportional" lineSpacingSize="1.1"/>
+					</textElement>
+					<text><![CDATA[Partícipe]]></text>
+				</staticText>
+				<line>
+					<reportElement x="319" y="197" width="165" height="1" forecolor="#003A6F" uuid="03fdce9c-0247-4080-8b39-0acd87b3f7ae">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					</reportElement>
+				</line>
+				<staticText>
+					<reportElement x="319" y="199" width="165" height="58" forecolor="#003A6F" uuid="7c021fa5-3167-4465-a889-01f513bd2774">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Center" markup="none">
+						<font fontName="Arial" size="10" isBold="false"/>
+						<paragraph lineSpacing="Single" lineSpacingSize="2.0"/>
+					</textElement>
+					<text><![CDATA[Agente
+P.p. Banco BICE
+Cornelio Saavedra Correa
+Rut: 7.010.918-2]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="169" y="340" width="223" height="47" forecolor="#003A6F" uuid="6876502c-3058-4dae-9608-80398be8af24">
+						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Center" markup="none">
+						<font fontName="Arial" size="10" isBold="false"/>
+						<paragraph lineSpacing="Single" lineSpacingSize="2.0"/>
+					</textElement>
+					<text><![CDATA[BICE Inversiones 
+Administradora General de Fondos S.A.
+Rut: 96.514.410-2]]></text>
+				</staticText>
+				<image hAlign="Center" vAlign="Middle">
+					<reportElement x="319" y="118" width="163" height="77" uuid="176aa518-d5bd-4efb-ad2b-8a6a35b0b181">
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					</reportElement>
+					<imageExpression><![CDATA["CONTRATO_GNRAL_FMU/Firma_CSCorrea.png"]]></imageExpression>
+				</image>
+				<image hAlign="Center" vAlign="Middle">
+					<reportElement x="198" y="264" width="163" height="75" uuid="8f1622a4-5ded-4506-b990-44878f5babe0">
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					</reportElement>
+					<imageExpression><![CDATA["CONTRATO_GNRAL_FMU/FIRMAJV.jpg"]]></imageExpression>
+				</image>
+				<line>
+					<reportElement x="198" y="338" width="165" height="1" forecolor="#003A6F" uuid="bb267217-1259-466f-820c-f8ad2441e837">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					</reportElement>
+				</line>
+				<textField>
+					<reportElement x="107" y="137" width="135" height="60" forecolor="#003A6F" uuid="14281c7f-adb5-48a6-a8f4-74617604d4a6">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Justified">
+						<font fontName="Arial" size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{par_fir_par}.trim()]]></textFieldExpression>
+				</textField>
+				<image>
+					<reportElement x="42" y="127" width="60" height="60" uuid="62d76f6b-7985-46a1-9072-7e65133c2216">
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<printWhenExpression><![CDATA[!$P{par_fir_par}.trim().isEmpty()]]></printWhenExpression>
+					</reportElement>
+					<imageExpression><![CDATA["CONTRATO_GNRAL_FMU/firmaContatoGF.gif"]]></imageExpression>
+				</image>
+			</frame>
+		</band>
+	</detail>
+</jasperReport>
