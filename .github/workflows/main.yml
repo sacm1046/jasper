@@ -1,0 +1,20 @@
+name: Manual Workflow Execution
+
+on:
+  workflow_dispatch:
+    inputs:
+      mensaje:
+        description: 'Mensaje personalizado'
+        required: false
+        default: 'Ejecución manual del workflow'
+        type: string
+
+jobs:
+  ejecutar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout del repositorio
+        uses: actions/checkout@v4
+
+      - name: Mostrar mensaje de ejecución
+        run: echo "El workflow se ejecutó manualmente con el mensaje: ${{ github.event.inputs.mensaje }}"
