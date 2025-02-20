@@ -3,10 +3,13 @@ name: Manual Workflow Execution
 on:
   workflow_dispatch:
     inputs:
-      mensaje:
-        description: 'Mensaje personalizado'
+      entorno:
+        description: 'Selecciona una opción'
         required: true
-        type: string
+        type: choice
+        options:
+          - Java 6
+          - Java 8
 
 jobs:
   ejecutar:
@@ -17,8 +20,8 @@ jobs:
 
       - name: Asignar input a variable de entorno
         run: |
-          echo "MENSAJE=${{ github.event.inputs.mensaje }}" >> $GITHUB_ENV
+          echo "ENTORNO=${{ github.event.inputs.entorno }}" >> $GITHUB_ENV
 
       - name: Mostrar mensaje de ejecución
         run: |
-          echo "El workflow se ejecutó manualmente con el mensaje: $MENSAJE"
+          echo "El entorno seleccionado es: $ENTORNO"
