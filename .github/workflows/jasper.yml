@@ -62,7 +62,7 @@ jobs:
           echo "Archivo .jasper generado: $(ls *.jasper)"
 
       - name: Subir archivo .jasper como artefacto
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: archivo-compilado
           path: ./archivo.jasper
