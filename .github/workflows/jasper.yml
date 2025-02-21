@@ -15,20 +15,26 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - name: Subir archivo como artifact
+      - name: Verificar existencia del archivo .jrxml antes de subirlo
+        run: ls -lah "${{ github.event.inputs.file }}.jrxml" || echo "Archivo no encontrado"
+
+      - name: Subir archivo .jrxml como artifact
         uses: actions/upload-artifact@v4
         with:
-            name: "${{ github.event.inputs.file }}.jrxml"
-            path: "${{ github.event.inputs.file }}.jrxml"
-
-      - name: Verificar existencia del archivo
-        run: ls -lah "${{ github.event.inputs.file }}.jrxml"
+          name: archivo-jrxml
+          path: "${{ github.event.inputs.file }}.jrxml"
 
       - name: Construir imagen Docker
         run: |
           docker build --platform linux/amd64 -t java6-image-test .
+
+      - name: Descargar archivo .jrxml antes de ejecutarlo en el contenedor
+        uses: actions/download-artifact@v4
+        with:
+          name: archivo-jrxml
+          path: ./volumen  # Se coloca en la carpeta volumen para que Docker lo vea
 
       - name: Ejecutar contenedor y compilar el archivo .jrxml
         run: |
@@ -57,16 +63,19 @@ jobs:
                     }
                 }' > CompileReport.java &&
                 javac -cp \"$CLASSPATH\" CompileReport.java &&
-                java -cp \"$CLASSPATH:/app\" CompileReport /app/archivo.jrxml
+                java -cp \"$CLASSPATH:/app\" CompileReport /app/${{ github.event.inputs.file }}.jrxml
             "
+
+      - name: Verificar si el archivo .jasper se generó
+        run: ls -lah volumen/
 
       - name: Extraer archivo .jasper
         run: |
-          cp volumen/archivo.jasper .
+          cp volumen/"${{ github.event.inputs.file }}.jasper" .
           echo "Archivo .jasper generado: $(ls *.jasper)"
 
-      - name: Subir archivo .jasper como artefacto
+      - name: Subir archivo .jasper como artifact
         uses: actions/upload-artifact@v4
         with:
           name: archivo-compilado
-          path: ./archivo.jasper
+          path: "${{ github.event.inputs.file }}.jasper"
