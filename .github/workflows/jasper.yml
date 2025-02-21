@@ -48,7 +48,16 @@ jobs:
             echo 'Acquire::Check-Valid-Until \"false\";' > /etc/apt/apt.conf.d/99no-check-valid-until &&
             apt-get update &&
             apt-get install -y unzip &&
-            export CLASSPATH=/app/jasperreports-5.6.0/dist/*:/app/jasperreports-5.6.0/lib/* &&
+            
+            # Verificar que JasperReports se copió correctamente
+            ls -lah /app/jasperreports-5.6.0/lib/ &&
+            ls -lah /app/jasperreports-5.6.0/dist/ &&
+      
+            # Generar CLASSPATH dinámico
+            export CLASSPATH=$(find /app/jasperreports-5.6.0/lib/ -name '*.jar' | tr '\n' ':') &&
+            export CLASSPATH=\"$CLASSPATH:/app/jasperreports-5.6.0/dist/*\" &&
+            echo \"CLASSPATH: $CLASSPATH\" &&
+      
             echo 'import net.sf.jasperreports.engine.*;
             public class CompileReport {
                 public static void main(String[] args) {
@@ -64,9 +73,12 @@ jobs:
                     }
                 }
             }' > CompileReport.java &&
+      
+            # Compilar y ejecutar
             javac -cp \"$CLASSPATH\" CompileReport.java &&
             java -cp \"$CLASSPATH:/app\" CompileReport /app/${{ github.event.inputs.file }}.jrxml
           "
+      
 
     #   - name: Verificar si el archivo .jasper se generó
     #     run: ls -lah volumen/
