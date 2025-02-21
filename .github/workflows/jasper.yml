@@ -1,13 +1,9 @@
 name: Compile Jrxml to Jasper
 
 on:
-  workflow_dispatch:
-    inputs:
-      file:
-        description: 'Archivo .jrxml a compilar'
-        required: true
-        type: string
-        default: CONTRATO_GNRAL_FMU_v6
+  push:
+    branches:
+        - main
 
 jobs:
   compile-jasper:
