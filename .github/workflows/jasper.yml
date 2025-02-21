@@ -25,12 +25,17 @@ jobs:
           echo "Haciendo ejecutable el instalador..."
           chmod +x jdk-6u45-linux-x64.bin
 
-          echo "Instalando JDK 6..."
-          mkdir -p /opt/java6
+          echo "Ejecutando el instalador en un directorio temporal..."
+          mkdir -p /tmp/java6
+          mv jdk-6u45-linux-x64.bin /tmp/java6/
+          cd /tmp/java6
           ./jdk-6u45-linux-x64.bin -noregister > /dev/null
 
+          echo "Verificando instalación..."
+          ls -l /tmp/java6
+
           echo "Moviendo JDK 6 a /opt/java6..."
-          mv jdk1.6.0_45 /opt/java6
+          sudo mv /tmp/java6/jdk1.6.0_45 /opt/java6
 
           echo "Configurando Java 6 en el entorno..."
           echo "JAVA_HOME=/opt/java6" >> $GITHUB_ENV
