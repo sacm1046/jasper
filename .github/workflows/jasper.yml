@@ -34,7 +34,8 @@ jobs:
 
       - name: Compilar .jrxml a .jasper
         run: |
-          docker run --rm \
+          # Ejecutar el contenedor sin eliminarlo inmediatamente
+          docker run --name java6-container \
             -v $(pwd)/volumen:/app \
             java6-image-test bash -c "
             echo 'deb http://archive.debian.org/debian wheezy main' > /etc/apt/sources.list &&
@@ -43,7 +44,15 @@ jobs:
             apt-get update &&
             apt-get install -y unzip &&
             unzip /app/jasperreports-5.6.0-project.zip -d /app/ &&
-            export CLASSPATH=/app/jasperreports-5.6.0/dist/jasperreports-5.6.0.jar:/app/jasperreports-5.6.0/lib/* &&
+            
+            # Verificar si los archivos se copiaron correctamente dentro del contenedor
+            ls -lah /app/ &&
+            
+            # Configurar CLASSPATH
+            export CLASSPATH=$(find /app/jasperreports-5.6.0/dist/ -name '*.jar' | tr '\n' ':') &&
+            echo \"CLASSPATH: $CLASSPATH\" &&
+      
+            # Crear el código Java para compilar el .jrxml
             echo 'import net.sf.jasperreports.engine.*;
             public class CompileReport {
                 public static void main(String[] args) {
@@ -59,10 +68,22 @@ jobs:
                     }
                 }
             }' > CompileReport.java &&
+            
+            # Compilar y ejecutar
             javac -cp \"$CLASSPATH\" CompileReport.java &&
-            java -cp \"$CLASSPATH:/app\" CompileReport /app/archivo.jrxml
+            java -cp \"$CLASSPATH:/app\" CompileReport /app/${{ github.event.inputs.file }}.jrxml &&
+            
+            # Mover el archivo compilado a una carpeta accesible desde GitHub Actions
+            cp /app/${{ github.event.inputs.file }}.jasper /github/workspace/
           "
-           
+      
+          # Extraer el archivo del contenedor antes de eliminarlo
+          docker cp java6-container:/app/${{ github.event.inputs.file }}.jasper ./volumen/
+      
+          # Eliminar el contenedor después de copiar los archivos
+          docker rm java6-container
+      
+
 
     #   - name: Verificar si el archivo .jasper se generó
     #     run: ls -lah volumen/
