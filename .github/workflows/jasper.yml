@@ -29,12 +29,6 @@ jobs:
       - name: Construir imagen Docker
         run: docker build --platform linux/amd64 -t java6-image-test .
 
-      - name: Descargar archivo .jrxml antes de ejecutarlo en el contenedor
-        uses: actions/download-artifact@v4
-        with:
-          name: archivo-jrxml
-          path: ./volumen  # Se coloca en la carpeta volumen para que Docker lo vea
-
       - name: Verificar contenido de JasperReports en el contenedor
         run: docker run --rm java6-image-test ls -lah /app
 
