@@ -48,12 +48,18 @@ jobs:
             echo 'Acquire::Check-Valid-Until \"false\";' > /etc/apt/apt.conf.d/99no-check-valid-until &&
             apt-get update &&
             
-            # Verificar si JasperReports se copió
+            # Verificar que JasperReports se copió
             ls -lah /app/ &&
             ls -lah /app/jasperreports-5.6.0/ &&
       
-            # Configurar CLASSPATH correctamente con `dist/`
-            export CLASSPATH=$(find /app/jasperreports-5.6.0/dist/ -name '*.jar' | tr '\n' ':') &&
+            # Evitar error si `dist/` no existe
+            if [ -d \"/app/jasperreports-5.6.0/dist/\" ]; then
+                export CLASSPATH=$(find /app/jasperreports-5.6.0/dist/ -name '*.jar' | tr '\n' ':')
+            else
+                echo \"⚠️ ERROR: La carpeta /app/jasperreports-5.6.0/dist/ no existe\"
+                exit 1
+            fi
+      
             echo \"CLASSPATH: $CLASSPATH\" &&
       
             echo 'import net.sf.jasperreports.engine.*;
@@ -76,7 +82,6 @@ jobs:
             javac -cp \"$CLASSPATH\" CompileReport.java &&
             java -cp \"$CLASSPATH:/app\" CompileReport /app/${{ github.event.inputs.file }}.jrxml
           "
-      
       
       
 
