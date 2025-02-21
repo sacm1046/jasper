@@ -11,7 +11,7 @@ on:
 
 jobs:
   compile-jasper:
-    runs-on: ubuntu-latest  # Usa una VM en GitHub Actions
+    runs-on: ubuntu-latest
 
     steps:
       - name: 📥 Checkout del código
@@ -21,8 +21,6 @@ jobs:
         run: |
           echo "Descargando JDK 6..."
           curl -L -o jdk-6u45-linux-x64.bin https://github.com/sacm1046/jasper/releases/download/v6/jdk-6u45-linux-x64.bin
-
-          echo "Haciendo ejecutable el instalador..."
           chmod +x jdk-6u45-linux-x64.bin
 
           echo "Ejecutando el instalador en un directorio temporal..."
@@ -30,9 +28,6 @@ jobs:
           mv jdk-6u45-linux-x64.bin /tmp/java6/
           cd /tmp/java6
           ./jdk-6u45-linux-x64.bin -noregister > /dev/null
-
-          echo "Verificando instalación..."
-          ls -l /tmp/java6
 
           echo "Moviendo JDK 6 a /opt/java6..."
           sudo mv /tmp/java6/jdk1.6.0_45 /opt/java6
@@ -61,6 +56,11 @@ jobs:
           echo "Limpiando archivos innecesarios..."
           rm -rf lib/jasperreports-5.6.0/
 
+      - name: 📥 Descargar Dependencias Faltantes (commons-logging)
+        run: |
+          echo "Descargando Apache Commons Logging..."
+          curl -L -o lib/commons-logging-1.1.3.jar https://repo1.maven.org/maven2/commons-logging/commons-logging/1.1.3/commons-logging-1.1.3.jar
+
       - name: 📜 Compilar .jrxml a .jasper
         run: |
           echo "Compilando archivos JRXML..."
@@ -75,9 +75,9 @@ jobs:
           echo '  }' >> CompileReport.java
           echo '}' >> CompileReport.java
 
-          javac -cp lib/jasperreports-5.6.0.jar CompileReport.java
+          javac -cp "lib/*" CompileReport.java
           for file in reports/*.jrxml; do
-            java -cp .:lib/jasperreports-5.6.0.jar CompileReport "$file"
+            java -cp ".:lib/*" CompileReport "$file"
             mv "${file%.jrxml}.jasper" compiled_reports/
           done
 
