@@ -11,13 +11,18 @@ on:
 
 jobs:
   compile-jasper:
-    runs-on: ubuntu-latest
-    container:
-      image: jrei/openjdk-6
+    runs-on: ubuntu-latest  # Usa una VM en GitHub Actions
 
     steps:
       - name: 📥 Checkout del código
         uses: actions/checkout@v4
+
+      - name: 🛠 Instalar Java 6 (OpenJDK 6)
+        run: |
+          sudo add-apt-repository "deb http://security.ubuntu.com/ubuntu precise-security main"
+          sudo apt-get update
+          sudo apt-get install -y openjdk-6-jdk
+          java -version
 
       - name: 📂 Crear estructura de directorios
         run: mkdir -p compiled_reports lib
@@ -25,10 +30,10 @@ jobs:
       - name: 📥 Descargar JasperReports 5.6.0 desde GitHub Releases
         run: |
           curl -L -o jasperreports-5.6.0.zip \
-          https://github.com/sacm1046/jasper/releases/download/v5.6.0/jasperreports-5.6.0-project.zip
+          https://github.com/usuario/repositorio/releases/download/v1.0/jasperreports-5.6.0.zip
           unzip jasperreports-5.6.0.zip -d lib/
           mv lib/jasperreports-5.6.0/lib/jasperreports-5.6.0.jar lib/
-          rm -rf lib/jasperreports-5.6.0/
+          rm -rf lib/jasperreports-5.6.0/  # Limpieza de archivos innecesarios
 
       - name: 📜 Compilar .jrxml a .jasper
         run: |
