@@ -60,9 +60,31 @@ jobs:
       
             export CLASSPATH=$(find /app/jasperreports-5.6.0/dist/ -name '*.jar' | tr '\n' ':')
             
-            javac -cp \"$CLASSPATH\" CompileReport.java &&
+            # CREAR EL ARCHIVO JAVA
+            echo 'import net.sf.jasperreports.engine.*;
+            public class CompileReport {
+                public static void main(String[] args) {
+                    if (args.length < 1) {
+                        System.out.println(\"Uso: java CompileReport <archivo.jrxml>\");
+                        return;
+                    }
+                    try {
+                        JasperCompileManager.compileReportToFile(args[0]);
+                        System.out.println(\"Archivo compilado: \" + args[0].replace(\".jrxml\", \".jasper\"));
+                    } catch (JRException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }' > /app/CompileReport.java
+      
+            # Verificar si el archivo JAVA realmente se creó
+            ls -lah /app/
+      
+            # Compilar y ejecutar
+            javac -cp \"$CLASSPATH\" /app/CompileReport.java &&
             java -cp \"$CLASSPATH:/app\" CompileReport /app/${{ github.event.inputs.file }}.jrxml
           "
+      
       
     #   - name: Verificar si el archivo .jasper se generó
     #     run: ls -lah volumen/
