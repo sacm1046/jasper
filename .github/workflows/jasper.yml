@@ -32,6 +32,12 @@ jobs:
       - name: Verificar contenido de JasperReports en el contenedor
         run: docker run --rm java6-image-test ls -lah /app
 
+      - name: Verificar contenido de JasperReports en el contenedor 2 
+        run: docker run --rm java6-image-test ls -lah /app/jasperreports-5.6.0
+    
+      - name: Verificar contenido de JasperReports en el contenedor 3
+        run: docker run --rm java6-image-test ls -lah /app/jasperreports-5.6.0/dist
+
     #   - name: Ejecutar contenedor y compilar el archivo .jrxml
     #     run: |
     #       docker run --rm \
