@@ -67,6 +67,9 @@ jobs:
           echo "Descargando Apache Commons BeanUtils..."
           curl -L -o lib/commons-beanutils-1.9.4.jar https://repo1.maven.org/maven2/commons-beanutils/commons-beanutils/1.9.4/commons-beanutils-1.9.4.jar
 
+          echo "Descargando Apache Commons Collections..."
+          curl -L -o lib/commons-collections-3.2.2.jar https://repo1.maven.org/maven2/commons-collections/commons-collections/3.2.2/commons-collections-3.2.2.jar
+
       - name: 📜 Compilar .jrxml a .jasper
         run: |
           echo "Compilando archivos JRXML..."
