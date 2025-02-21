@@ -30,30 +30,30 @@ jobs:
         run: |
           docker build --platform linux/amd64 -t java6-image-test .
 
-      - name: Compilar .jrxml a .jasper
+      - name: Ejecutar contenedor y compilar el archivo .jrxml
         run: |
-          docker run -it --rm \
-            -v $(pwd)/volumen:/app \
-            java6-image-test bash -c "
-            apt-get update && apt-get install -y unzip &&
-            export CLASSPATH=/app/jasperreports-5.6.0/dist/jasperreports-5.6.0.jar:/app/jasperreports-5.6.0/lib/* &&
-            echo 'import net.sf.jasperreports.engine.*;
-            public class CompileReport {
-                public static void main(String[] args) {
-                    if (args.length < 1) {
-                        System.out.println(\"Uso: java CompileReport <archivo.jrxml>\");
-                        return;
-                    }
-                    try {
-                        JasperCompileManager.compileReportToFile(args[0]);
-                        System.out.println(\"Archivo compilado: \" + args[0].replace(\".jrxml\", \".jasper\"));
-                    } catch (JRException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }' > CompileReport.java &&
-            javac -cp \"$CLASSPATH\" CompileReport.java &&
-            java -cp \"$CLASSPATH:/app\" CompileReport /app/archivo.jrxml
+          docker run --rm \
+              -v $(pwd)/volumen:/app \
+              java6-image-test bash -c "
+              apt-get update && apt-get install -y unzip &&
+              export CLASSPATH=/app/jasperreports-5.6.0/dist/jasperreports-5.6.0.jar:/app/jasperreports-5.6.0/lib/* &&
+              echo 'import net.sf.jasperreports.engine.*;
+              public class CompileReport {
+                  public static void main(String[] args) {
+                      if (args.length < 1) {
+                          System.out.println(\"Uso: java CompileReport <archivo.jrxml>\");
+                          return;
+                      }
+                      try {
+                          JasperCompileManager.compileReportToFile(args[0]);
+                          System.out.println(\"Archivo compilado: \" + args[0].replace(\".jrxml\", \".jasper\"));
+                      } catch (JRException e) {
+                          e.printStackTrace();
+                      }
+                  }
+              }' > CompileReport.java &&
+              javac -cp \"$CLASSPATH\" CompileReport.java &&
+              java -cp \"$CLASSPATH:/app\" CompileReport /app/archivo.jrxml
           "
 
       - name: Extraer archivo .jasper
