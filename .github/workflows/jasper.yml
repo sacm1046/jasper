@@ -17,12 +17,21 @@ jobs:
       - name: 📥 Checkout del código
         uses: actions/checkout@v4
 
-      - name: 🛠 Instalar Java 6 (OpenJDK 6)
+      - name: 🛠 Descargar e instalar Java 6 manualmente
         run: |
-          sudo add-apt-repository "deb http://security.ubuntu.com/ubuntu precise-security main"
-          sudo apt-get update
-          sudo apt-get install -y openjdk-6-jdk
-          java -version
+          echo "Descargando OpenJDK 6..."
+          curl -L -o openjdk-6.tar.gz https://github.com/docker-library/openjdk/raw/716c573d67cdcfb12d4e869c234ebebfc6b71c46/6/jdk/Dockerfile/openjdk-6.tar.gz
+          
+          echo "Extrayendo OpenJDK 6..."
+          mkdir -p /opt/java6
+          tar -xzf openjdk-6.tar.gz -C /opt/java6 --strip-components=1
+          
+          echo "Configurando Java 6..."
+          echo "export JAVA_HOME=/opt/java6" >> $GITHUB_ENV
+          echo "export PATH=$JAVA_HOME/bin:$PATH" >> $GITHUB_ENV
+          
+          echo "Verificando instalación de Java 6..."
+          /opt/java6/bin/java -version
 
       - name: 📂 Crear estructura de directorios
         run: mkdir -p compiled_reports lib
