@@ -17,7 +17,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Bajar archivo como artifact
+      - name: Subir archivo como artifact
         uses: actions/upload-artifact@v4
         with:
             name: "${{ github.event.inputs.file }}.jrxml"
@@ -33,31 +33,31 @@ jobs:
       - name: Ejecutar contenedor y compilar el archivo .jrxml
         run: |
             docker run --rm \
-            -v $(pwd)/volumen:/app \
-            java6-image-test bash -c "
-            echo 'deb http://archive.debian.org/debian wheezy main' > /etc/apt/sources.list &&
-            echo 'deb http://archive.debian.org/debian-security wheezy/updates main' >> /etc/apt/sources.list &&
-            echo 'Acquire::Check-Valid-Until \"false\";' > /etc/apt/apt.conf.d/99no-check-valid-until &&
-            apt-get update &&
-            apt-get install -y unzip &&
-            export CLASSPATH=/app/jasperreports-5.6.0/dist/jasperreports-5.6.0.jar:/app/jasperreports-5.6.0/lib/* &&
-            echo 'import net.sf.jasperreports.engine.*;
-            public class CompileReport {
-                public static void main(String[] args) {
-                    if (args.length < 1) {
-                        System.out.println(\"Uso: java CompileReport <archivo.jrxml>\");
-                        return;
+                -v $(pwd)/volumen:/app \
+                java6-image-test bash -c "
+                echo 'deb http://archive.debian.org/debian wheezy main' > /etc/apt/sources.list &&
+                echo 'deb http://archive.debian.org/debian-security wheezy/updates main' >> /etc/apt/sources.list &&
+                echo 'Acquire::Check-Valid-Until \"false\";' > /etc/apt/apt.conf.d/99no-check-valid-until &&
+                apt-get update &&
+                apt-get install -y unzip &&
+                export CLASSPATH=/app/jasperreports-5.6.0/dist/jasperreports-5.6.0.jar:/app/jasperreports-5.6.0/lib/* &&
+                echo 'import net.sf.jasperreports.engine.*;
+                public class CompileReport {
+                    public static void main(String[] args) {
+                        if (args.length < 1) {
+                            System.out.println(\"Uso: java CompileReport <archivo.jrxml>\");
+                            return;
+                        }
+                        try {
+                            JasperCompileManager.compileReportToFile(args[0]);
+                            System.out.println(\"Archivo compilado: \" + args[0].replace(\".jrxml\", \".jasper\"));
+                        } catch (JRException e) {
+                            e.printStackTrace();
+                        }
                     }
-                    try {
-                        JasperCompileManager.compileReportToFile(args[0]);
-                        System.out.println(\"Archivo compilado: \" + args[0].replace(\".jrxml\", \".jasper\"));
-                    } catch (JRException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }' > CompileReport.java &&
-            javac -cp \"$CLASSPATH\" CompileReport.java &&
-            java -cp \"$CLASSPATH:/app\" CompileReport /app/archivo.jrxml
+                }' > CompileReport.java &&
+                javac -cp \"$CLASSPATH\" CompileReport.java &&
+                java -cp \"$CLASSPATH:/app\" CompileReport /app/archivo.jrxml
             "
 
       - name: Extraer archivo .jasper
