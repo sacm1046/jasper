@@ -17,19 +17,25 @@ jobs:
       - name: 📥 Checkout del código
         uses: actions/checkout@v4
 
-      - name: 🛠 Descargar e instalar Java 6 manualmente
+      - name: 🛠 Descargar e instalar Java 6 desde BIN
         run: |
-          echo "Descargando OpenJDK 6..."
-          curl -L -o openjdk-6.tar.gz https://github.com/docker-library/openjdk/raw/716c573d67cdcfb12d4e869c234ebebfc6b71c46/6/jdk/Dockerfile/openjdk-6.tar.gz
-          
-          echo "Extrayendo OpenJDK 6..."
+          echo "Descargando JDK 6..."
+          curl -L -o jdk-6u45-linux-x64.bin https://github.com/sacm1046/jasper/releases/download/v6/jdk-6u45-linux-x64.bin
+
+          echo "Haciendo ejecutable el instalador..."
+          chmod +x jdk-6u45-linux-x64.bin
+
+          echo "Instalando JDK 6..."
           mkdir -p /opt/java6
-          tar -xzf openjdk-6.tar.gz -C /opt/java6 --strip-components=1
-          
-          echo "Configurando Java 6..."
-          echo "export JAVA_HOME=/opt/java6" >> $GITHUB_ENV
-          echo "export PATH=$JAVA_HOME/bin:$PATH" >> $GITHUB_ENV
-          
+          ./jdk-6u45-linux-x64.bin -noregister > /dev/null
+
+          echo "Moviendo JDK 6 a /opt/java6..."
+          mv jdk1.6.0_45 /opt/java6
+
+          echo "Configurando Java 6 en el entorno..."
+          echo "JAVA_HOME=/opt/java6" >> $GITHUB_ENV
+          echo "PATH=$JAVA_HOME/bin:$PATH" >> $GITHUB_ENV
+
           echo "Verificando instalación de Java 6..."
           /opt/java6/bin/java -version
 
@@ -38,11 +44,17 @@ jobs:
 
       - name: 📥 Descargar JasperReports 5.6.0 desde GitHub Releases
         run: |
-          curl -L -o jasperreports-5.6.0.zip \
-          https://github.com/usuario/repositorio/releases/download/v1.0/jasperreports-5.6.0.zip
+          echo "Descargando JasperReports 5.6.0..."
+          curl -L -o jasperreports-5.6.0.zip https://github.com/sacm1046/jasper/releases/download/v5.6.0/jasperreports-5.6.0-project.zip
+          
+          echo "Extrayendo JasperReports..."
           unzip jasperreports-5.6.0.zip -d lib/
-          mv lib/jasperreports-5.6.0/lib/jasperreports-5.6.0.jar lib/
-          rm -rf lib/jasperreports-5.6.0/  # Limpieza de archivos innecesarios
+          
+          echo "Buscando el .jar de JasperReports..."
+          find lib/ -name "jasperreports-5.6.0.jar" -exec mv {} lib/ \;
+
+          echo "Limpiando archivos innecesarios..."
+          rm -rf lib/jasperreports-5.6.0/
 
       - name: 📜 Compilar .jrxml a .jasper
         run: |
