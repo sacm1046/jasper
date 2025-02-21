@@ -1,4 +1,4 @@
-name: Jasper Workflow 2
+name: Jasper Workflow
 
 on:
   workflow_dispatch:
@@ -25,12 +25,6 @@ jobs:
 
       - name: Verificar existencia del archivo
         run: ls -lah "${{ github.event.inputs.file }}.jrxml"
-
-      - name: Bajar archivo como artifact
-        uses: actions/download-artifact@v4
-        with:
-            name: "${{ github.event.inputs.file }}.jrxml"
-            path: "${{ github.event.inputs.file }}.jrxml"
 
       - name: Construir imagen Docker
         run: |
