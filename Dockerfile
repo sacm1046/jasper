@@ -7,6 +7,3 @@ RUN ls -lah / || echo "⚠️ ERROR: No se encontró el archivo en el build cont
 
 # Copiar el archivo .zip al contenedor
 COPY jasperreports-5.6.0-project.zip /app/
-
-# Verificar que el archivo realmente se copió
-RUN ls -lah /app/ || echo "⚠️ ERROR: El archivo NO se copió correctamente"

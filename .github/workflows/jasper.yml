@@ -16,20 +16,26 @@ jobs:
     steps:
       - name: Checkout del código
         uses: actions/checkout@v4
-
-      - name: Verificar existencia del archivo .jrxml antes de subirlo
-        run: ls -lah "${{ github.event.inputs.file }}.jrxml" || echo "Archivo no encontrado"
-
-      - name: Subir archivo .jrxml como artifact
-        uses: actions/upload-artifact@v4
         with:
-          name: "${{ github.event.inputs.file }}.jrxml"
-          path: "${{ github.event.inputs.file }}.jrxml"
+          lfs: true
+      
+      - name: Clonar archivos de Git LFS
+        run: |
+          git lfs install
+          git lfs pull
+      
+      - name: Verificar si `jasperreports-5.6.0-project.zip` es un puntero de LFS
+        run: |
+          file jasperreports-5.6.0-project.zip || echo "⚠️ ERROR: jasperreports-5.6.0-project.zip no existe o es un puntero de LFS"
+
+      - name: Verificar contenido del ZIP antes de construir
+        run: |
+          unzip -l jasperreports-5.6.0-project.zip || echo "⚠️ ERROR: Falló la lectura del ZIP"
 
       - name: Construir imagen Docker
         run: docker build --platform linux/amd64 -t java6-image-test .
 
-      - name: Verificar si `jasperreports-5.6.0-project.zip` está en el contexto
+      - name: Verificar si `jasperreports-5.6.0-project.zip` está en el contexto de Docker
         run: ls -lah jasperreports-5.6.0-project.zip
 
       - name: Compilar .jrxml a .jasper
@@ -50,15 +56,22 @@ jobs:
       
             # Extraer archivos
             unzip /app/jasperreports-5.6.0-project.zip -d /app/
+
+            # Depurar estructura después de unzip
+            echo '📂 Contenido de /app/ después de unzip:'
+            ls -lah /app/
+
+            echo '📂 Contenido de /app/jasperreports-5.6.0/ después de unzip:'
+            ls -lah /app/jasperreports-5.6.0/
       
-            # Verificar que `dist/` realmente se extrajo
+            # Verificar si `dist/` realmente se extrajo
             if [ ! -d /app/jasperreports-5.6.0/dist/ ]; then
               echo '⚠️ ERROR: No se encontró la carpeta /app/jasperreports-5.6.0/dist/'
               ls -lah /app/jasperreports-5.6.0/
               exit 1
             fi
       
-            export CLASSPATH=$(find /app/jasperreports-5.6.0/dist/ -name '*.jar' | tr '\n' ':')
+            export CLASSPATH=$(find /app/jasperreports-5.6.0/ -name '*.jar' | tr '\n' ':')
             
             # CREAR EL ARCHIVO JAVA
             echo 'import net.sf.jasperreports.engine.*;
@@ -79,23 +92,12 @@ jobs:
       
             # Verificar si el archivo JAVA realmente se creó
             ls -lah /app/
-      
+
+            # Mostrar el CLASSPATH generado
+            echo '🛠️ CLASSPATH final:'
+            echo \"$CLASSPATH\"
+
             # Compilar y ejecutar
             javac -cp \"$CLASSPATH\" /app/CompileReport.java &&
             java -cp \"$CLASSPATH:/app\" CompileReport /app/${{ github.event.inputs.file }}.jrxml
           "
-      
-      
-    #   - name: Verificar si el archivo .jasper se generó
-    #     run: ls -lah volumen/
-
-    #   - name: Extraer archivo .jasper
-    #     run: |
-    #       cp volumen/"${{ github.event.inputs.file }}.jasper" .
-    #       echo "Archivo .jasper generado: $(ls *.jasper)"
-
-    #   - name: Subir archivo .jasper como artifact
-    #     uses: actions/upload-artifact@v4
-    #     with:
-    #       name: "${{ github.event.inputs.file }}.jasper"
-    #       path: "${{ github.event.inputs.file }}.jasper"
