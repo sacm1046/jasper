@@ -34,18 +34,24 @@ jobs:
 
       - name: Compilar .jrxml a .jasper
         run: |
-          docker run --rm \
-            -v $(pwd)/volumen:/app \
-            java6-image-test bash -c "
+          docker run --rm java6-image-test bash -c "
+            echo 'deb http://archive.debian.org/debian wheezy main' > /etc/apt/sources.list &&
+            echo 'deb http://archive.debian.org/debian-security wheezy/updates main' >> /etc/apt/sources.list &&
+            echo 'Acquire::Check-Valid-Until \"false\";' > /etc/apt/apt.conf.d/99no-check-valid-until &&
+            apt-get update &&
+            apt-get install -y unzip &&
+            
+            # Verificar que el archivo ZIP realmente existe antes de descomprimir
             if [ ! -f /app/jasperreports-5.6.0-project.zip ]; then
               echo '⚠️ ERROR: /app/jasperreports-5.6.0-project.zip NO existe en el contenedor'
               ls -lah /app/
               exit 1
             fi
-            
+      
+            # Extraer archivos
             unzip /app/jasperreports-5.6.0-project.zip -d /app/
-            
-            # Verificar si `dist/` realmente se extrajo
+      
+            # Verificar que `dist/` realmente se extrajo
             if [ ! -d /app/jasperreports-5.6.0/dist/ ]; then
               echo '⚠️ ERROR: No se encontró la carpeta /app/jasperreports-5.6.0/dist/'
               ls -lah /app/jasperreports-5.6.0/
@@ -58,9 +64,6 @@ jobs:
             java -cp \"$CLASSPATH:/app\" CompileReport /app/${{ github.event.inputs.file }}.jrxml
           "
       
-      
-
-
     #   - name: Verificar si el archivo .jasper se generó
     #     run: ls -lah volumen/
 
