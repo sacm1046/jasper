@@ -25,7 +25,7 @@ jobs:
       - name: 📥 Descargar JasperReports 5.6.0 desde GitHub Releases
         run: |
           curl -L -o jasperreports-5.6.0.zip \
-          https://github.com/usuario/repositorio/releases/download/v1.0/jasperreports-5.6.0.zip
+          https://github.com/sacm1046/jasper/releases/download/v5.6.0/jasperreports-5.6.0-project.zip
           unzip jasperreports-5.6.0.zip -d lib/
           mv lib/jasperreports-5.6.0/lib/jasperreports-5.6.0.jar lib/
           rm -rf lib/jasperreports-5.6.0/
