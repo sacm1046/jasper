@@ -1,4 +1,4 @@
-name: Jasper Workflow
+name: Compile Jrxml to Jasper
 
 on:
   workflow_dispatch:
@@ -10,94 +10,48 @@ on:
         default: CONTRATO_GNRAL_FMU_v6
 
 jobs:
-  compilar-jrxml:
+  compile-jasper:
     runs-on: ubuntu-latest
+    container:
+      image: eugenmayer/java:6
 
     steps:
-      - name: Checkout del código
+      - name: 📥 Checkout del código
         uses: actions/checkout@v4
+
+      - name: 📂 Crear estructura de directorios
+        run: mkdir -p compiled_reports lib
+
+      - name: 📥 Descargar JasperReports 5.6.0 desde GitHub Releases
+        run: |
+          curl -L -o jasperreports-5.6.0.zip \
+          https://github.com/usuario/repositorio/releases/download/v1.0/jasperreports-5.6.0.zip
+          unzip jasperreports-5.6.0.zip -d lib/
+          mv lib/jasperreports-5.6.0/lib/jasperreports-5.6.0.jar lib/
+          rm -rf lib/jasperreports-5.6.0/
+
+      - name: 📜 Compilar .jrxml a .jasper
+        run: |
+          echo "Compilando archivos JRXML..."
+          echo 'import net.sf.jasperreports.engine.*;' > CompileReport.java
+          echo 'import java.io.*;' >> CompileReport.java
+          echo 'public class CompileReport {' >> CompileReport.java
+          echo '  public static void main(String[] args) throws JRException {' >> CompileReport.java
+          echo '    String sourceFile = args[0];' >> CompileReport.java
+          echo '    String outputFile = sourceFile.replace(".jrxml", ".jasper");' >> CompileReport.java
+          echo '    JasperCompileManager.compileReportToFile(sourceFile, outputFile);' >> CompileReport.java
+          echo '    System.out.println("Compilado: " + outputFile);' >> CompileReport.java
+          echo '  }' >> CompileReport.java
+          echo '}' >> CompileReport.java
+
+          javac -cp lib/jasperreports-5.6.0.jar CompileReport.java
+          for file in reports/*.jrxml; do
+            java -cp .:lib/jasperreports-5.6.0.jar CompileReport "$file"
+            mv "${file%.jrxml}.jasper" compiled_reports/
+          done
+
+      - name: 📤 Subir archivos compilados como artefactos
+        uses: actions/upload-artifact@v4
         with:
-          lfs: true
-      
-      - name: Clonar archivos de Git LFS
-        run: |
-          git lfs install
-          git lfs pull
-      
-      - name: Verificar si `jasperreports-5.6.0-project.zip` es un puntero de LFS
-        run: |
-          file jasperreports-5.6.0-project.zip || echo "⚠️ ERROR: jasperreports-5.6.0-project.zip no existe o es un puntero de LFS"
-
-      - name: Verificar contenido del ZIP antes de construir
-        run: |
-          unzip -l jasperreports-5.6.0-project.zip || echo "⚠️ ERROR: Falló la lectura del ZIP"
-
-      - name: Construir imagen Docker
-        run: docker build --platform linux/amd64 -t java6-image-test .
-
-      - name: Verificar si `jasperreports-5.6.0-project.zip` está en el contexto de Docker
-        run: ls -lah jasperreports-5.6.0-project.zip
-
-      - name: Compilar .jrxml a .jasper
-        run: |
-          docker run --rm java6-image-test bash -c "
-            echo 'deb http://archive.debian.org/debian wheezy main' > /etc/apt/sources.list &&
-            echo 'deb http://archive.debian.org/debian-security wheezy/updates main' >> /etc/apt/sources.list &&
-            echo 'Acquire::Check-Valid-Until \"false\";' > /etc/apt/apt.conf.d/99no-check-valid-until &&
-            apt-get update &&
-            apt-get install -y unzip &&
-            
-            # Verificar que el archivo ZIP realmente existe antes de descomprimir
-            if [ ! -f /app/jasperreports-5.6.0-project.zip ]; then
-              echo '⚠️ ERROR: /app/jasperreports-5.6.0-project.zip NO existe en el contenedor'
-              ls -lah /app/
-              exit 1
-            fi
-      
-            # Extraer archivos
-            unzip /app/jasperreports-5.6.0-project.zip -d /app/
-
-            # Depurar estructura después de unzip
-            echo '📂 Contenido de /app/ después de unzip:'
-            ls -lah /app/
-
-            echo '📂 Contenido de /app/jasperreports-5.6.0/ después de unzip:'
-            ls -lah /app/jasperreports-5.6.0/
-      
-            # Verificar si `dist/` realmente se extrajo
-            if [ ! -d /app/jasperreports-5.6.0/dist/ ]; then
-              echo '⚠️ ERROR: No se encontró la carpeta /app/jasperreports-5.6.0/dist/'
-              ls -lah /app/jasperreports-5.6.0/
-              exit 1
-            fi
-      
-            export CLASSPATH=$(find /app/jasperreports-5.6.0/ -name '*.jar' | tr '\n' ':')
-            
-            # CREAR EL ARCHIVO JAVA
-            echo 'import net.sf.jasperreports.engine.*;
-            public class CompileReport {
-                public static void main(String[] args) {
-                    if (args.length < 1) {
-                        System.out.println(\"Uso: java CompileReport <archivo.jrxml>\");
-                        return;
-                    }
-                    try {
-                        JasperCompileManager.compileReportToFile(args[0]);
-                        System.out.println(\"Archivo compilado: \" + args[0].replace(\".jrxml\", \".jasper\"));
-                    } catch (JRException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }' > /app/CompileReport.java
-      
-            # Verificar si el archivo JAVA realmente se creó
-            ls -lah /app/
-
-            # Mostrar el CLASSPATH generado
-            echo '🛠️ CLASSPATH final:'
-            echo \"$CLASSPATH\"
-
-            # Compilar y ejecutar
-            javac -cp \"$CLASSPATH\" /app/CompileReport.java &&
-            java -cp \"$CLASSPATH:/app\" CompileReport /app/${{ github.event.inputs.file }}.jrxml
-          "
+          name: compiled-reports
+          path: compiled_reports/*.jasper
