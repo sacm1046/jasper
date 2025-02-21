@@ -32,36 +32,14 @@ jobs:
       - name: Verificar contenido de JasperReports en el contenedor
         run: docker run --rm java6-image-test ls -lah /app
 
-      - name: Verificar contenido de JasperReports en el contenedor 2 
-        run: docker run --rm java6-image-test ls -lah /app/jasperreports-5.6.0
-    
-      - name: Verificar contenido de JasperReports en el contenedor 3
-        run: docker run --rm java6-image-test ls -lah /app/jasperreports-5.6.0/dist
-
-      - name: Ejecutar contenedor y compilar el archivo .jrxml
+      - name: Compilar .jrxml a .jasper
         run: |
           docker run --rm \
             -v $(pwd)/volumen:/app \
             java6-image-test bash -c "
-            echo 'deb http://archive.debian.org/debian wheezy main' > /etc/apt/sources.list &&
-            echo 'deb http://archive.debian.org/debian-security wheezy/updates main' >> /etc/apt/sources.list &&
-            echo 'Acquire::Check-Valid-Until \"false\";' > /etc/apt/apt.conf.d/99no-check-valid-until &&
-            apt-get update &&
-            
-            # Verificar que JasperReports se copió
-            ls -lah /app/ &&
-            ls -lah /app/jasperreports-5.6.0/ &&
-      
-            # Evitar error si `dist/` no existe
-            if [ -d \"/app/jasperreports-5.6.0/dist/\" ]; then
-                export CLASSPATH=$(find /app/jasperreports-5.6.0/dist/ -name '*.jar' | tr '\n' ':')
-            else
-                echo \"⚠️ ERROR: La carpeta /app/jasperreports-5.6.0/dist/ no existe\"
-                exit 1
-            fi
-      
-            echo \"CLASSPATH: $CLASSPATH\" &&
-      
+            apt-get update && apt-get install -y unzip &&
+            unzip /app/jasperreports-5.6.0-project.zip -d /app/ &&
+            export CLASSPATH=/app/jasperreports-5.6.0/dist/jasperreports-5.6.0.jar:/app/jasperreports-5.6.0/lib/* &&
             echo 'import net.sf.jasperreports.engine.*;
             public class CompileReport {
                 public static void main(String[] args) {
@@ -77,12 +55,9 @@ jobs:
                     }
                 }
             }' > CompileReport.java &&
-      
-            # Compilar y ejecutar
             javac -cp \"$CLASSPATH\" CompileReport.java &&
-            java -cp \"$CLASSPATH:/app\" CompileReport /app/${{ github.event.inputs.file }}.jrxml
+            java -cp \"$CLASSPATH:/app\" CompileReport /app/archivo.jrxml
           "
-      
       
 
     #   - name: Verificar si el archivo .jasper se generó
