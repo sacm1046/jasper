@@ -13,7 +13,7 @@ jobs:
   compile-jasper:
     runs-on: ubuntu-latest
     container:
-      image: openjdk:6-jdk
+      image: jrei/openjdk-6
 
     steps:
       - name: 📥 Checkout del código
